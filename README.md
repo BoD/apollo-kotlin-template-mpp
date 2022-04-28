@@ -4,3 +4,8 @@ with [the new memory manager](https://github.com/JetBrains/kotlin/blob/master/ko
 
 This uses the Apollo Kotlin snapshots that support
 the [Hierarchical Project Structure](https://kotlinlang.org/docs/multiplatform-hierarchy.html).
+
+Works on Mac only.
+
+- `./gradlew nativeTest` to run tests
+- `./gradlew assemble && ./build/bin/native/debugExecutable/apollo-kotlin-template-mpp.kexe`
