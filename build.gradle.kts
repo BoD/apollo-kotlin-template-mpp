@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.6.21"
-    id("com.apollographql.apollo3") version "3.2.2-SNAPSHOT"
+    id("com.apollographql.apollo3") version "3.3.0"
 }
 
 group = "com.example.myapp"
@@ -29,11 +29,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("com.apollographql.apollo3:apollo-runtime:3.2.2-SNAPSHOT")
-                implementation("com.apollographql.apollo3:apollo-testing-support:3.2.2-SNAPSHOT")
-                implementation("com.apollographql.apollo3:apollo-testing-support:3.2.2-SNAPSHOT")
-                implementation("com.apollographql.apollo3:apollo-normalized-cache:3.2.2-SNAPSHOT")
-                implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.2.2-SNAPSHOT")
+                implementation("com.apollographql.apollo3:apollo-runtime:3.3.0")
+                implementation("com.apollographql.apollo3:apollo-testing-support:3.3.0")
+                implementation("com.apollographql.apollo3:apollo-normalized-cache:3.3.0")
+                implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.3.0")
 
                 // Make good use of the new memory manager - see https://github.com/JetBrains/kotlin/blob/master/kotlin-native/NEW_MM.md
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
