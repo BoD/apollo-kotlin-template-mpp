@@ -7,6 +7,7 @@ group = "com.example.myapp"
 version = "1.0.0-SNAPSHOT"
 
 repositories {
+//    mavenLocal()
     maven {
         url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
     }
@@ -40,6 +41,12 @@ kotlin {
         }
         val commonTest by getting
     }
+
+    sourceSets {
+        all {
+            languageSettings.optIn("kotlin.RequiresOptIn")
+        }
+    }
 }
 
 afterEvaluate {
@@ -53,6 +60,22 @@ afterEvaluate {
 apollo {
     packageName.set("com.example.myapp")
 }
+
+// Workaround for https://youtrack.jetbrains.com/issue/KT-51970
+// Uncomment when using Kotlin < 1.6.20
+//afterEvaluate {
+//    afterEvaluate {
+//        tasks.configureEach {
+//            if (
+//                name.startsWith("compile")
+//                && name.endsWith("KotlinMetadata")
+//            ) {
+//                enabled = false
+//            }
+//        }
+//    }
+//}
+
 
 // `./gradlew nativeTest` to run tests
 // `./gradlew assemble && ./build/bin/native/debugExecutable/apollo-kotlin-template-mpp.kexe`
