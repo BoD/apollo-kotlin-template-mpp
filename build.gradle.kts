@@ -1,6 +1,6 @@
 plugins {
   kotlin("multiplatform") version "1.9.23"
-  id("com.apollographql.apollo3") version "3.8.3"
+//  id("com.apollographql.apollo3") version "3.8.3"
   id("com.apollographql.apollo3") version "4.0.0-beta.5"
 }
 
