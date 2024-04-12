@@ -4,8 +4,8 @@ import com.example.myapp.useApolloKotlin
 import kotlin.test.Test
 
 class MyAppTest {
-    @Test
-    fun test() {
-        useApolloKotlin()
-    }
+  @Test
+  fun test() {
+    useApolloKotlin()
+  }
 }
