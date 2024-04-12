@@ -5,13 +5,13 @@ import com.apollographql.apollo3.cache.normalized.FetchPolicy
 import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
 import com.apollographql.apollo3.cache.normalized.fetchPolicy
 import com.apollographql.apollo3.cache.normalized.normalizedCache
-import com.apollographql.apollo3.cache.normalized.sql.SqlNormalizedCacheFactory
-import kotlinx.coroutines.runBlocking
 
-fun useApolloKotlin() = runBlocking {
+//import com.apollographql.apollo3.cache.normalized.sql.SqlNormalizedCacheFactory
+
+suspend fun useApolloKotlin() {
   val apolloClient = ApolloClient.Builder()
     .serverUrl("https://apollo-fullstack-tutorial.herokuapp.com/graphql")
-    .normalizedCache(MemoryCacheFactory(1024 * 1024).chain(SqlNormalizedCacheFactory("apollo.db")))
+    .normalizedCache(MemoryCacheFactory(1024 * 1024)/*.chain(SqlNormalizedCacheFactory("apollo.db"))*/)
     .build()
 
   println()

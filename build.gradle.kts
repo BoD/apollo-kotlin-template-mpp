@@ -1,5 +1,6 @@
 plugins {
   kotlin("multiplatform") version "1.9.23"
+  id("com.apollographql.apollo3") version "3.8.3"
   id("com.apollographql.apollo3") version "4.0.0-beta.5"
 }
 
@@ -29,18 +30,26 @@ kotlin {
     }
   }
 
+  js(IR) {
+    browser {
+      binaries.executable()
+    }
+  }
+
   sourceSets {
     val commonMain by getting {
       dependencies {
         implementation("com.apollographql.apollo3:apollo-runtime")
         implementation("com.apollographql.apollo3:apollo-normalized-cache")
-        implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite")
-
-        // Make good use of the new memory manager - see https://github.com/JetBrains/kotlin/blob/master/kotlin-native/NEW_MM.md
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+//        implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite")
       }
     }
-    val commonTest by getting
+    val commonTest by getting {
+      dependencies {
+        implementation(kotlin("test"))
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
+      }
+    }
   }
 }
 
@@ -58,5 +67,7 @@ apollo {
   }
 }
 
-// `./gradlew macosArm64Test` (macosX64Test on intel) or to run tests
-// `./gradlew assemble && ./build/bin/macosArm64/debugExecutable/apollo-kotlin-template-mpp.kexe` (or macosX64) to run executable
+// `./gradlew macosArm64Test` (macosX64Test on intel) or to run native tests
+// `./gradlew jsTest` to run js tests
+// `./gradlew assemble && ./build/bin/macosArm64/debugExecutable/apollo-kotlin-template-mpp.kexe` (or macosX64) to run native app
+// `./gradlew jsRun` to run js app
