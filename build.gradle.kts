@@ -1,5 +1,5 @@
 plugins {
-  kotlin("multiplatform") version "1.9.23"
+  kotlin("multiplatform") version "2.0.0-RC1"
 //  id("com.apollographql.apollo3") version "3.8.3"
   id("com.apollographql.apollo3") version "4.0.0-beta.5"
 }
@@ -67,7 +67,7 @@ apollo {
   }
 }
 
-// `./gradlew macosArm64Test` (macosX64Test on intel) or to run native tests
+// `./gradlew macosArm64Test` (or `macosX64Test` for Intel Mac) or to run native tests
+// `./gradlew assemble && ./build/bin/macosArm64/debugExecutable/apollo-kotlin-template-mpp.kexe` (or `macosX64` for Intel Mac) to run native app
 // `./gradlew jsTest` to run js tests
-// `./gradlew assemble && ./build/bin/macosArm64/debugExecutable/apollo-kotlin-template-mpp.kexe` (or macosX64) to run native app
 // `./gradlew jsRun` to run js app
