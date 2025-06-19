@@ -8,6 +8,7 @@ build.number
 build.properties
 etc/apk
 etc/proguard
+.kotlin
 
 .idea/*
 !.idea/codeStyles

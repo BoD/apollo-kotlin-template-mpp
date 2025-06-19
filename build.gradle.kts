@@ -1,14 +1,10 @@
 plugins {
-  kotlin("multiplatform") version "2.0.0-RC1"
-//  id("com.apollographql.apollo3") version "3.8.3"
-  id("com.apollographql.apollo3") version "4.0.0-beta.5"
+  kotlin("multiplatform") version "2.1.21"
+  id("com.apollographql.apollo") version "5.0.0-SNAPSHOT"
 }
 
-group = "com.example.myapp"
-version = "1.0.0-SNAPSHOT"
-
 repositories {
-//    mavenLocal()
+  mavenLocal()
 //    maven {
 //        url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 //    }
@@ -16,14 +12,18 @@ repositories {
 }
 
 kotlin {
+  compilerOptions {
+    freeCompilerArgs.add("-Xskip-prerelease-check")
+  }
+
   if (System.getProperty("os.arch") == "aarch64") {
-    macosArm64() {
+    macosArm64 {
       binaries {
         executable()
       }
     }
   } else {
-    macosX64() {
+    macosX64 {
       binaries {
         executable()
       }
@@ -37,17 +37,17 @@ kotlin {
   }
 
   sourceSets {
-    val commonMain by getting {
+    commonMain {
       dependencies {
-        implementation("com.apollographql.apollo3:apollo-runtime")
-        implementation("com.apollographql.apollo3:apollo-normalized-cache")
+        implementation("com.apollographql.apollo:apollo-runtime")
+        implementation("com.apollographql.apollo:apollo-normalized-cache")
 //        implementation("com.apollographql.apollo3:apollo-normalized-cache-sqlite")
       }
     }
-    val commonTest by getting {
+    commonTest {
       dependencies {
         implementation(kotlin("test"))
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1-Beta")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
       }
     }
   }
@@ -64,6 +64,10 @@ afterEvaluate {
 apollo {
   service("service") {
     packageName.set("com.example.myapp")
+    introspection {
+      endpointUrl.set("https://apollo-fullstack-tutorial.herokuapp.com/graphql")
+      schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+    }
   }
 }
 
